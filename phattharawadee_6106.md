@@ -1,0 +1,1 @@
+Author: ภัทราวดี ส่องศรีโรจน์ Section: 3 I am responsible for: รับinput ของทั้งสอง Team: we are powerpupgirl Semester 2/2568
