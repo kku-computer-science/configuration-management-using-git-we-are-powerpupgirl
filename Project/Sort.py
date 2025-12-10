@@ -1,64 +1,58 @@
+import time
+#swap function
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
 
-# partition function
+# partition function 
 def partition(arr, low, high):
-    
-    # choose the pivot
     pivot = arr[high]
-    
-    # index of smaller element and indicates 
-    # the right position of pivot found so far
     i = low - 1
-    
-    # traverse arr[low..high] and move all smaller
-    # elements to the left side. Elements from low to 
-    # i are smaller after every iteration
+
     for j in range(low, high):
         if arr[j] < pivot:
             i += 1
             swap(arr, i, j)
-    
-    # move pivot after smaller elements and
-    # return its position
+
     swap(arr, i + 1, high)
     return i + 1
 
-# swap function
-def swap(arr, i, j):
-    arr[i], arr[j] = arr[j], arr[i]
-
-# the QuickSort function implementation
+#Quick Sort implementation
 def quickSort(arr, low, high):
     if low < high:
-        
-        # pi is the partition return index of pivot
         pi = partition(arr, low, high)
-        
-        # recursion calls for smaller elements
-        # and greater or equals elements
         quickSort(arr, low, pi - 1)
         quickSort(arr, pi + 1, high)
 
-if __name__ == "__main__":
-    arr = [10, 7, 8, 9, 1, 5]
+# Bubble sort implementation
+def bubbleSort(arr):
     n = len(arr)
+    for i in range(n-1):
+        swapped = False
+        for j in range(n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        if not swapped:
+            break 
+        
+# main program 
 
-    quickSort(arr, 0, n - 1)
-    
-    for val in arr:
-        print(val, end=" ")
+lst_input = input("Enter numbers separated by spaces: ").split()
+numbers = [int(num) for num in lst_input]
 
+choice = int(input("Choose sorting algorithm:\n1. Quick Sort\n2. Bubble Sort\nEnter choice (1 or 2): "))
 
-mylist = [7, 3, 9, 12, 11]
+start_time = time.time()
 
-n = len(mylist)
-for i in range(n-1):
-  swapped = False
-  for j in range(n-i-1):
-    if mylist[j] > mylist[j+1]:
-      mylist[j], mylist[j+1] = mylist[j+1], mylist[j]
-      swapped = True
-  if not swapped:
-    break
+if choice == 1:
+    quickSort(numbers, 0, len(numbers) - 1)
+    print("Sorted array using Quick Sort:", numbers)
+elif choice == 2:
+    bubbleSort(numbers)
+    print("Sorted array using Bubble Sort:", numbers)
+else:
+    print("Invalid choice!")
+    exit()
 
-print(mylist)
-
+end_time = time.time()
+print(f"Time taken to sort: {end_time - start_time} seconds")
